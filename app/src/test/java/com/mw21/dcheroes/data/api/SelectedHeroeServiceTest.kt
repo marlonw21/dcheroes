@@ -1,5 +1,6 @@
 package com.mw21.dcheroes.data.api
 
+import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
@@ -12,7 +13,8 @@ import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class DcHeroesServiceTest {
+class SelectedHeroeServiceTest {
+
     private lateinit var service: DcHeroesService
     private lateinit var server: MockWebServer
 
@@ -35,41 +37,30 @@ class DcHeroesServiceTest {
     }
 
     @Test
-    fun getDcHeroes_SentRequest_receivedExpected(){
+    fun getSelectedHeroe_SentRequest_receivedExpected(){
         runBlocking {
-            enqueueMockResponse("dcheroesresponse.json")
-            val body = service.getDcHeroes()
+            enqueueMockResponse("selectedheroeresponse.json")
+            val response =  service.getSelectedHeroe("batman")
             val request = server.takeRequest()
-            assertThat(body).isNotNull()
-            assertThat(request.path).isEqualTo("/dcheroes/")
+            Truth.assertThat(response).isNotNull()
+            Truth.assertThat(request.path).isEqualTo("/dcheroes/batman")
         }
     }
 
     @Test
-    fun getDcHeroes_receivedResponse_correctSizeOfHeroes(){
+    fun getSelectedHeroe_receivedResponse_correctContent(){
         runBlocking {
-            enqueueMockResponse("dcheroesresponse.json")
-            val body = service.getDcHeroes().body()
-            val heroesList = body?.heroes
-            assertThat(heroesList?.size).isEqualTo(7)
+            enqueueMockResponse("selectedheroeresponse.json")
+            val response =  service.getSelectedHeroe("batman").body()
+            assertThat(response?.id).isNotNull()
+            assertThat(response?.id).isEqualTo("batman")
+            assertThat(response?.img_heroe).isNotEmpty()
         }
-    }
 
-    @Test
-    fun getDcHeroes_receivedResponse_correctContent(){
-        runBlocking {
-            enqueueMockResponse("dcheroesresponse.json")
-            val body = service.getDcHeroes().body()
-            val heroesList = body?.heroes
-            for (i in 0..heroesList?.size!!.minus(1)){
-                assertThat(heroesList?.get(i)).isNotNull()
-                assertThat(heroesList?.get(i)?.id).isNotNull()
-            }
-        }
     }
 
     @After
     fun tearDown() {
-       server.shutdown()
+        server.shutdown()
     }
 }
