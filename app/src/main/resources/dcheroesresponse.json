@@ -1,0 +1,11 @@
+{"status":true,
+  "heroes":[
+    {"id":"batman","name":"Batman","location":"Gotham","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/batman.jpg"},
+    {"id":"superman","name":"Superman","location":"Metropolis","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/superman.jpg"},
+    {"id":"wonderwoman","name":"Wonder Woman","location":"Themyscira","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/ww.jpg"},
+    {"id":"flash","name":"The Flash","location":"Central City","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/flash2.jpg"},
+    {"id":"greenlantern","name":"Green Lantern","location":"?","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/greenL.jpg"},
+    {"id":"aquaman","name":"Aquaman","location":"Atlantis","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/aquaman.jpg"},
+    {"id":"martianmanhunter","name":"Martian Manhunter","location":"Mars","img_logo":"https://dbsi.000webhostapp.com/img_dc/imglogos/mm.jpg"}
+  ]
+}
